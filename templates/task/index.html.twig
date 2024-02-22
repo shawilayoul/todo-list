@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F1F1F1;
+			padding: 2px 6px;
+		}
+		i {
+			color: red;
+			cursor: pointer;
+		}
+		.done{
+			text-decoration-line: line-through;
+		}
+	</style>
+	<div class="example-wrapper">
+		<h1>to do list</2>
+		<form method="POST" action="{{path('create_task')}}">
+			<input type="text" name="title" placeholder="Enter task to be done">
+			<button>Add</button>
+		</form>
+		<ul>
+			{%for task in tasks%}
+				<li>
+					<a href="{{path('update_status',{'id':task.id})}}" class="update">
+						<i>update</i>
+					</a>
+					{{task.title}}
+					<a href="{{path('delete_status',{'id':task.id})}}">
+						<i>x</i>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
